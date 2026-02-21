@@ -19,7 +19,7 @@ export const profileService = {
 
         const approvedSubmissions = submissions.filter(s => s.status === 'approved')
         const totalSolved = approvedSubmissions.length
-        const patternsCompleted = new Set(approvedSubmissions.map(s => s.problems.pattern_id)).size
+        const patternsCompleted = new Set(approvedSubmissions.map(s => (s.problems as any)?.pattern_id)).size
 
         const { data: recentSubmissions, error: recentError } = await supabaseAdmin
             .from('submissions')
