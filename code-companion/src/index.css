@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 4%;
+    --foreground: 213 31% 95%;
+
+    --card: 240 18% 7%;
+    --card-foreground: 213 31% 95%;
+
+    --popover: 240 18% 7%;
+    --popover-foreground: 213 31% 95%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 188 95% 43%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 12% 16%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 240 12% 16%;
+    --accent-foreground: 213 31% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --border: 240 14% 15%;
+    --input: 240 14% 15%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.75rem;
+
+    --surface: 240 18% 7%;
+    --surface-foreground: 213 31% 95%;
+
+    --sidebar-background: 240 18% 7%;
+    --sidebar-foreground: 213 31% 95%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 12% 16%;
+    --sidebar-accent-foreground: 213 31% 95%;
+    --sidebar-border: 240 14% 15%;
+    --sidebar-ring: 239 84% 67%;
+
+    --glass-bg: 240 18% 7%;
+    --glass-border: 0 0% 100%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(239, 84%, 67%), hsl(188, 95%, 43%));
+    --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.1), 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-glow-hover: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  code, pre, kbd, samp {
+    @apply font-mono;
+  }
+}
+
+/* Grain texture overlay */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Glass card */
+.glass-card {
+  background: hsla(var(--glass-bg) / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsla(var(--glass-border) / 0.05);
+  box-shadow: var(--shadow-glow);
+  transition: all 300ms ease;
+}
+
+.glass-card:hover {
+  box-shadow: var(--shadow-glow-hover);
+}
+
+/* Gradient border on hover */
+.gradient-border-hover {
+  position: relative;
+}
+.gradient-border-hover::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(239, 84%, 67%), hsl(188, 95%, 43%));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.gradient-border-hover:hover::before {
+  opacity: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsla(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(var(--muted-foreground) / 0.5);
+}
+
+/* Mesh gradient background */
+.mesh-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, hsla(239, 84%, 67%, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsla(188, 95%, 43%, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, hsla(239, 84%, 50%, 0.08) 0%, transparent 50%),
+    hsl(var(--background));
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+@keyframes meshMove {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+  }
+  33% {
+    background-position: 30% 20%, 70% 40%, 20% 60%;
+  }
+  66% {
+    background-position: 10% 40%, 90% 10%, 60% 80%;
+  }
+}
+
+/* Bell shake */
+@keyframes bellShake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-12deg); }
+  45% { transform: rotate(10deg); }
+  60% { transform: rotate(-8deg); }
+  75% { transform: rotate(5deg); }
+}
+.bell-shake {
+  animation: bellShake 0.6s ease;
+}
+
+/* Progress ring animation */
+@keyframes progressRing {
+  from { stroke-dashoffset: var(--ring-circumference); }
+  to { stroke-dashoffset: var(--ring-offset); }
+}
+.progress-ring-animate {
+  animation: progressRing 1s ease-out forwards;
+}
