@@ -232,7 +232,7 @@ export default function Problems() {
                 <div className="flex gap-3 mt-4">
                   <button onClick={() => setSubmitModal(null)} className="flex-1 py-2.5 rounded-lg border border-border text-muted-foreground text-sm hover:text-foreground transition-colors">Cancel</button>
                   <button onClick={handleSubmit} disabled={submitting}
-                    className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground text-sm font-semibold hover:shadow-[0_0_24px_rgba(99,102,241,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-60">
+                    className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground text-sm font-semibold hover:shadow-[0_0_24px_rgba(0,255,133,0.3)] transition-all flex items-center justify-center gap-2 disabled:opacity-60">
                     {submitting && <Loader2 size={14} className="animate-spin" />}
                     {submitting ? 'Submitting...' : 'Submit Solution →'}
                   </button>

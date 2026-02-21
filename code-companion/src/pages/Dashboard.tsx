@@ -30,12 +30,12 @@ export default function Dashboard() {
   const recentSubs = profile?.recentSubmissions || [];
 
   const barData = [
-    { name: 'Easy', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'easy').length, fill: 'hsl(142,71%,45%)' },
-    { name: 'Medium', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'medium').length, fill: 'hsl(38,92%,50%)' },
-    { name: 'Hard', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'hard').length, fill: 'hsl(0,84%,60%)' },
+    { name: 'Easy', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'easy').length, fill: 'hsl(151,100%,50%)' },
+    { name: 'Medium', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'medium').length, fill: 'hsl(210,100%,56%)' },
+    { name: 'Hard', solved: recentSubs.filter((s: any) => s.problems?.difficulty === 'hard').length, fill: 'hsl(324,100%,50%)' },
   ];
 
-  const pieColors = ['hsl(239,84%,67%)', 'hsl(188,95%,43%)', 'hsl(142,71%,45%)', 'hsl(38,92%,50%)', 'hsl(0,84%,60%)'];
+  const pieColors = ['hsl(151,100%,50%)', 'hsl(210,100%,56%)', 'hsl(188,95%,43%)', 'hsl(142,71%,45%)', 'hsl(324,100%,50%)'];
   const pieData = patterns.slice(0, 5).map((p: any, i: number) => ({
     name: p.name,
     value: p.problem_count || 0,
@@ -111,7 +111,7 @@ export default function Dashboard() {
                 <BarChart data={barData} layout="vertical">
                   <XAxis type="number" hide />
                   <YAxis dataKey="name" type="category" width={60} tick={{ fill: 'hsl(215,16%,47%)', fontSize: 12 }} axisLine={false} tickLine={false} />
-                  <Tooltip contentStyle={{ background: 'hsl(240,18%,7%)', border: '1px solid hsl(240,14%,15%)', borderRadius: 8, color: 'hsl(213,31%,95%)' }} />
+                  <Tooltip contentStyle={{ background: 'hsl(0,0%,8%)', border: '1px solid hsl(0,0%,20%)', borderRadius: 8, color: 'hsl(0,0%,100%)' }} />
                   <Bar dataKey="solved" radius={[0, 4, 4, 0]} barSize={20}>
                     {barData.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
                   </Bar>

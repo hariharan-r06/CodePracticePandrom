@@ -4,60 +4,62 @@
 
 @layer base {
   :root {
-    --background: 240 20% 4%;
-    --foreground: 213 31% 95%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
 
-    --card: 240 18% 7%;
-    --card-foreground: 213 31% 95%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 240 18% 7%;
-    --popover-foreground: 213 31% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 239 84% 67%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 151 100% 50%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 188 95% 43%;
+    --secondary: 210 100% 56%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 12% 16%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 240 12% 16%;
-    --accent-foreground: 213 31% 95%;
+    --accent: 210 100% 56%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 151 100% 50%;
+    --success-foreground: 0 0% 0%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 0%;
 
-    --border: 240 14% 15%;
-    --input: 240 14% 15%;
-    --ring: 239 84% 67%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 151 100% 50%;
 
     --radius: 0.75rem;
 
-    --surface: 240 18% 7%;
-    --surface-foreground: 213 31% 95%;
+    --surface: 0 0% 8%;
+    --surface-foreground: 0 0% 100%;
 
-    --sidebar-background: 240 18% 7%;
-    --sidebar-foreground: 213 31% 95%;
-    --sidebar-primary: 239 84% 67%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 12% 16%;
-    --sidebar-accent-foreground: 213 31% 95%;
-    --sidebar-border: 240 14% 15%;
-    --sidebar-ring: 239 84% 67%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 151 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 151 100% 50%;
 
-    --glass-bg: 240 18% 7%;
+    --glass-bg: 0 0% 8%;
     --glass-border: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(239, 84%, 67%), hsl(188, 95%, 43%));
-    --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.1), 0 4px 24px rgba(0, 0, 0, 0.4);
-    --shadow-glow-hover: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 8px 32px rgba(0, 0, 0, 0.5);
+    --hover-highlight: 324 100% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(151, 100%, 50%), hsl(210, 100%, 56%));
+    --shadow-glow: 0 0 0 1px rgba(0, 255, 133, 0.05), 0 4px 24px rgba(0, 0, 0, 0.6);
+    --shadow-glow-hover: 0 0 0 1px rgba(0, 255, 133, 0.2), 0 8px 32px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -70,11 +72,19 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
   }
 
-  code, pre, kbd, samp {
+  code,
+  pre,
+  kbd,
+  samp {
     @apply font-mono;
   }
 }
@@ -110,6 +120,7 @@
 .gradient-border-hover {
   position: relative;
 }
+
 .gradient-border-hover::before {
   content: '';
   position: absolute;
@@ -124,6 +135,7 @@
   transition: opacity 300ms ease;
   pointer-events: none;
 }
+
 .gradient-border-hover:hover::before {
   opacity: 1;
 }
@@ -133,13 +145,16 @@
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsla(var(--muted-foreground) / 0.3);
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: hsla(var(--muted-foreground) / 0.5);
 }
@@ -147,20 +162,38 @@
 /* Mesh gradient background */
 .mesh-gradient {
   background:
-    radial-gradient(ellipse at 20% 50%, hsla(239, 84%, 67%, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, hsla(188, 95%, 43%, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, hsla(239, 84%, 50%, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 50%, hsla(151, 100%, 50%, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsla(210, 100%, 56%, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, hsla(151, 100%, 50%, 0.04) 0%, transparent 50%),
     hsl(var(--background));
   animation: meshMove 20s ease-in-out infinite;
 }
 
+.hover-pink-glow:hover {
+  color: hsl(var(--hover-highlight));
+  filter: drop-shadow(0 0 8px hsla(var(--hover-highlight) / 0.5));
+  transition: all 300ms ease;
+}
+
+.btn-cyber-primary {
+  @apply bg-primary text-primary-foreground font-bold hover:shadow-[0_0_20px_hsla(var(--primary)/0.4)] transition-all duration-300;
+}
+
+.btn-cyber-secondary {
+  @apply bg-secondary text-secondary-foreground font-bold hover:shadow-[0_0_20px_hsla(var(--secondary)/0.4)] transition-all duration-300;
+}
+
 @keyframes meshMove {
-  0%, 100% {
+
+  0%,
+  100% {
     background-position: 0% 0%, 100% 0%, 50% 100%;
   }
+
   33% {
     background-position: 30% 20%, 70% 40%, 20% 60%;
   }
+
   66% {
     background-position: 10% 40%, 90% 10%, 60% 80%;
   }
@@ -168,22 +201,48 @@
 
 /* Bell shake */
 @keyframes bellShake {
-  0%, 100% { transform: rotate(0deg); }
-  15% { transform: rotate(15deg); }
-  30% { transform: rotate(-12deg); }
-  45% { transform: rotate(10deg); }
-  60% { transform: rotate(-8deg); }
-  75% { transform: rotate(5deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(15deg);
+  }
+
+  30% {
+    transform: rotate(-12deg);
+  }
+
+  45% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(-8deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
 }
+
 .bell-shake {
   animation: bellShake 0.6s ease;
 }
 
 /* Progress ring animation */
 @keyframes progressRing {
-  from { stroke-dashoffset: var(--ring-circumference); }
-  to { stroke-dashoffset: var(--ring-offset); }
+  from {
+    stroke-dashoffset: var(--ring-circumference);
+  }
+
+  to {
+    stroke-dashoffset: var(--ring-offset);
+  }
 }
+
 .progress-ring-animate {
   animation: progressRing 1s ease-out forwards;
 }

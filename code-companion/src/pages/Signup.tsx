@@ -71,7 +71,7 @@ export default function Signup() {
 
 
           <button type="submit" disabled={loading}
-            className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold text-sm hover:shadow-[0_0_24px_rgba(99,102,241,0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60">
+            className="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold text-sm hover:shadow-[0_0_24px_rgba(0,255,133,0.4)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60">
             {loading && <Loader2 size={16} className="animate-spin" />}
             {loading ? 'Creating Account...' : 'Create Account'}
           </button>
