@@ -23,7 +23,7 @@ export default function Dashboard() {
   const { data: stats } = useQuery({ queryKey: ['submission-stats'], queryFn: () => submissionsService.getStats() });
 
   const totalSolved = stats?.approved || 0;
-  const totalProblems = (stats?.total || 0) + 20; // estimate
+  const totalProblems = stats?.totalProblems || 0;
   const streak = profile?.stats?.streak || user?.streak || 0;
   const patternsCompleted = profile?.stats?.patternsCompleted || 0;
   const completionRate = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;

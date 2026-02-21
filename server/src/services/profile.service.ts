@@ -30,11 +30,18 @@ export const profileService = {
 
         if (recentError) throw recentError
 
+        const { count: totalProblems, error: probError } = await supabaseAdmin
+            .from('problems')
+            .select('*', { count: 'exact', head: true })
+
+        const completionRate = (totalProblems && totalProblems > 0) ? Math.round((totalSolved / totalProblems) * 100) : 0
+
         return {
             ...profile,
             stats: {
                 totalSolved,
                 patternsCompleted,
+                completionRate,
                 streak: profile.streak || 0
             },
             recentSubmissions

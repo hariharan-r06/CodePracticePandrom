@@ -50,7 +50,7 @@ export default function Profile() {
 
   const recentSubs = submissions.slice(0, 5);
 
-  const totalSolved = profile?.stats?.completed || submissions.filter((s: any) => s.status === 'approved').length;
+  const totalSolved = profile?.stats?.totalSolved || 0;
   const patternsCompleted = profile?.stats?.patternsCompleted || 0;
   const completionRate = profile?.stats?.completionRate || 0;
   const longestStreak = profile?.stats?.streak || user?.streak || 0;

@@ -91,17 +91,24 @@ export const submissionsService = {
     },
 
     async getSubmissionStats(studentId?: string) {
-        let query = supabaseAdmin.from('submissions').select('status', { count: 'exact' })
-        if (studentId) query = query.eq('student_id', studentId)
+        let subQuery = supabaseAdmin.from('submissions').select('status')
+        if (studentId) subQuery = subQuery.eq('student_id', studentId)
 
-        const { data, error } = await query
+        const { data, error } = await subQuery
         if (error) throw error
+
+        const { count: totalProblems, error: probError } = await supabaseAdmin
+            .from('problems')
+            .select('*', { count: 'exact', head: true })
+
+        if (probError) throw probError
 
         const stats = {
             total: data.length,
             approved: data.filter(s => s.status === 'approved').length,
             pending: data.filter(s => s.status === 'pending').length,
-            rejected: data.filter(s => s.status === 'rejected').length
+            rejected: data.filter(s => s.status === 'rejected').length,
+            totalProblems: totalProblems || 0
         }
 
         return stats
