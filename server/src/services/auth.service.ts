@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '../config/supabase'
+import { supabase, supabaseAdmin } from '../config/supabase'
 import { signToken } from '../utils/jwt'
 
 export const authService = {
@@ -29,8 +29,9 @@ export const authService = {
     async login(data: any) {
         const { email, password } = data
 
-        // SignIn using supabase to verify credentials
-        const { data: authData, error: authError } = await supabaseAdmin.auth.signInWithPassword({
+        // Use the anon client for signInWithPassword to avoid polluting
+        // the supabaseAdmin session (which would override service_role with user session)
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email,
             password
         })
