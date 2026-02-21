@@ -4,7 +4,7 @@ export const leaderboardService = {
     async getLeaderboard(period: 'all' | 'week' | 'month' = 'all') {
         let query = supabaseAdmin
             .from('submissions')
-            .select('student_id, profiles(full_name, streak, avatar_url)')
+            .select('student_id, profiles!student_id(full_name, streak, avatar_url)')
             .eq('status', 'approved')
 
         if (period === 'week') {

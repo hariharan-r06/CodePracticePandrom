@@ -6,7 +6,7 @@ export const submissionsService = {
     async getSubmissionsByStudent(studentId: string, filters: any = {}) {
         let query = supabaseAdmin
             .from('submissions')
-            .select('*, problems(title, difficulty, platform), patterns:problems(patterns(name))')
+            .select('*, problems(title, difficulty, platform, pattern_id, patterns(name))')
             .eq('student_id', studentId)
 
         if (filters.status) query = query.eq('status', filters.status)
@@ -19,7 +19,7 @@ export const submissionsService = {
     async getAllSubmissions(filters: any = {}) {
         let query = supabaseAdmin
             .from('submissions')
-            .select('*, profiles(full_name), problems(title, difficulty, platform)')
+            .select('*, profiles!student_id(full_name), problems(title, difficulty, platform)')
 
         if (filters.status) query = query.eq('status', filters.status)
 
@@ -40,7 +40,7 @@ export const submissionsService = {
                 notes: data.notes,
                 status: 'pending'
             }])
-            .select('*, profiles:student_id(full_name), problems(title)')
+            .select('*, profiles!student_id(full_name), problems(title)')
             .single()
 
         if (error) throw error
@@ -56,7 +56,7 @@ export const submissionsService = {
     },
 
     async reviewSubmission(id: string, data: any, adminId: string) {
-        const { data: submission, error } = await supabaseAdmin
+        const { data: submissions, error } = await supabaseAdmin
             .from('submissions')
             .update({
                 status: data.status,
@@ -66,9 +66,10 @@ export const submissionsService = {
             })
             .eq('id', id)
             .select('*, problems(title)')
-            .single()
 
         if (error) throw error
+        if (!submissions || submissions.length === 0) throw new Error('Submission not found')
+        const submission = submissions[0]
 
         if (data.status === 'approved') {
             await notificationsService.notifyUser(submission.student_id, {

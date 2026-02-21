@@ -33,10 +33,10 @@ export default function Leaderboard() {
   });
 
   const data = rawData.map((e: any, i: number) => ({
-    rank: i + 1,
-    name: e.full_name || 'Anonymous',
-    initials: (e.full_name || 'U').split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2),
-    problemsSolved: e.problems_solved || 0,
+    rank: e.rank || i + 1,
+    name: e.name || e.full_name || 'Anonymous',
+    initials: (e.name || e.full_name || 'U').split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2),
+    problemsSolved: e.solved_count || e.problems_solved || 0,
     patternsDone: e.patterns_done || 0,
     streak: e.streak || 0,
     score: e.score || 0,
