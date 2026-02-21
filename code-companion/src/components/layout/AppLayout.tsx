@@ -10,7 +10,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children, title }: AppLayoutProps) {
   return (
-    <div className="grain-overlay min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full">
       <Sidebar />
       <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
         <TopBar title={title} />
